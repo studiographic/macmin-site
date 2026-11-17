@@ -1,116 +1,170 @@
-// Effect clips play only while on screen (and not at all with Reduce Motion).
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const videos = document.querySelectorAll(".effect video, .screen video, .scene video");
+document.documentElement.classList.add("js");
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
+// ---- Clips play only while on screen; a clip someone paused stays paused ----
+const onScreen = (v, play) => (play && !v.dataset.userPaused ? v.play().catch(() => {}) : v.pause());
 if (reduce) {
-  videos.forEach((v) => { v.removeAttribute("autoplay"); v.pause(); v.controls = true; });
+  $$("video").forEach((v) => { v.removeAttribute("autoplay"); v.pause(); v.controls = true; });
+  $$(".qt-bar").forEach((bar) => (bar.hidden = true));
 } else if ("IntersectionObserver" in window) {
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) e.target.play().catch(() => {});
-      else e.target.pause();
-    }
-  }, { threshold: 0.35 });
-  videos.forEach((v) => io.observe(v));
+  const io = new IntersectionObserver((es) => es.forEach((e) => onScreen(e.target, e.isIntersecting)), { threshold: 0.3 });
+  $$("#heroVideo, .scene video").forEach((v) => io.observe(v));
 }
 
-// Copy buttons.
-document.querySelectorAll(".copy").forEach((btn) => {
-  btn.addEventListener("click", async () => {
-    const text = document.getElementById(btn.dataset.copy)?.textContent ?? "";
-    try {
-      await navigator.clipboard.writeText(text);
-      btn.textContent = "Copied";
-      setTimeout(() => (btn.textContent = "Copy"), 1500);
-    } catch {}
+// ---- Play/pause buttons and the QuickTime progress bar ----
+function syncPause(v) {
+  const btn = $(`[data-pause="${v.id}"]`);
+  if (!btn) return;
+  const paused = !!v.dataset.userPaused;
+  btn.setAttribute("aria-pressed", String(paused));
+  $(".sr-only", btn).textContent = paused ? "Play" : "Pause";
+}
+$$("[data-pause]").forEach((btn) => {
+  const v = document.getElementById(btn.dataset.pause);
+  if (reduce) { btn.hidden = true; return; }
+  btn.addEventListener("click", () => {
+    if (v.dataset.userPaused) { delete v.dataset.userPaused; v.play().catch(() => {}); }
+    else { v.dataset.userPaused = "1"; v.pause(); }
+    syncPause(v);
   });
 });
+$$("[data-progress]").forEach((bar) => {
+  const v = document.getElementById(bar.dataset.progress);
+  v.addEventListener("timeupdate", () => { if (v.duration) bar.style.setProperty("--t", (v.currentTime / v.duration).toFixed(3)); });
+});
 
-// Version, file name and checksum all come from version.json (the same file the app checks for updates).
-fetch("version.json", { cache: "no-store" })
-  .then((r) => r.json())
-  .then((v) => {
-    if (v.sha256 && !v.sha256.startsWith("PASTE")) document.getElementById("sha").textContent = v.sha256;
-    if (v.file) document.getElementById("hash-cmd").textContent = `shasum -a 256 ~/Downloads/${v.file}`;
-    const os = v.minimumOS ? ` · macOS ${v.minimumOS.replace(/\.0$/, "")} or later` : "";
-    document.getElementById("version-line").textContent = `Version ${v.version}${os}`;
-  })
-  .catch(() => {});
+// ---- Effects window: one preview, eight to pick from; runs through them until you pick one ----
+const stage = $("#stage");
+const buttons = $$(".picker button");
+let showEffect = () => {};
+if (stage) {
+  const video = $("#stageVideo"), name = $("#stageName"), desc = $("#stageDesc");
+  const picker = $(".picker"), tour = $("#tour");
+  let current = 0, picked = false, visible = false;
+  buttons.forEach((b) => b.insertAdjacentHTML("beforeend", '<span class="run" aria-hidden="true"></span>'));
 
-// ---- Since 2001: reveal milestones, fill the line, unlock the counter at "Now" ----
-document.documentElement.classList.add("js");
-const timeline = document.getElementById("timeline");
-const counter = document.querySelector(".counter");
-const countEl = document.getElementById("minCount");
-const foot = document.getElementById("countFoot");
-const now = document.getElementById("msNow");
-
-if (timeline) {
-  const reveal = new IntersectionObserver((entries) => {
-    for (const e of entries) if (e.isIntersecting) { e.target.classList.add("seen"); reveal.unobserve(e.target); }
-  }, { rootMargin: "0px 0px -12% 0px" });
-  timeline.querySelectorAll(".ms").forEach((m) => reveal.observe(m));
-
-  let unlocked = false, countTimer;
-  const setCount = (to) => {
-    clearInterval(countTimer);
-    if (reduce) { countEl.textContent = to; return; }
-    let n = Number(countEl.textContent);
-    countTimer = setInterval(() => {
-      n += n < to ? 1 : -1;
-      countEl.textContent = n;
-      if (n === to) clearInterval(countTimer);
-    }, 70);
-  };
-
-  let ticking = false;
-  const onScroll = () => {
-    ticking = false;
-    const r = timeline.getBoundingClientRect();
-    const mid = innerHeight * 0.6;
-    const p = Math.min(1, Math.max(0, (mid - r.top) / r.height));
-    timeline.style.setProperty("--p", p.toFixed(3));
-    const shouldUnlock = now.getBoundingClientRect().top < mid;
-    if (shouldUnlock !== unlocked) {
-      unlocked = shouldUnlock;
-      counter.classList.toggle("unlocked", unlocked);
-      foot.textContent = unlocked ? "Welcome to the present." : "…and that’s been the list for a while.";
-      setCount(unlocked ? 10 : 2);
+  const show = (i, fromUser) => {
+    current = i;
+    const b = buttons[i], slug = b.dataset.effect;
+    buttons.forEach((x, j) => { x.setAttribute("aria-pressed", String(j === i)); x.style.removeProperty("--run"); });
+    video.src = `media/${slug}.mp4`;
+    video.poster = `media/${slug}.jpg`;
+    name.textContent = b.textContent;
+    desc.textContent = b.dataset.desc;
+    video.loop = picked;
+    if (fromUser) delete video.dataset.userPaused;
+    syncPause(video);
+    if (fromUser || visible) onScreen(video, true);
+    if (picker.scrollWidth > picker.clientWidth) {
+      picker.scrollTo({ left: b.parentElement.offsetLeft - picker.clientWidth / 2 + b.offsetWidth / 2, behavior: reduce ? "auto" : "smooth" });
     }
+    const next = buttons[(i + 1) % buttons.length].dataset.effect;
+    if (!$(`link[data-next="${next}"]`)) document.head.insertAdjacentHTML("beforeend", `<link rel="prefetch" href="media/${next}.mp4" data-next="${next}">`);
   };
-  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
-  onScroll();
+  const pick = (i) => {
+    if (!picked) { picked = true; desc.setAttribute("aria-live", "polite"); tour.hidden = reduce; }
+    show(i, true);
+  };
+  showEffect = pick;
+  buttons.forEach((b, i) => b.addEventListener("click", () => pick(i)));
+  tour.addEventListener("click", () => { picked = false; tour.hidden = true; desc.removeAttribute("aria-live"); show(0, true); });
+  picker.addEventListener("keydown", (e) => {
+    const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+    if (!step) return;
+    e.preventDefault();
+    const i = (current + step + buttons.length) % buttons.length;
+    buttons[i].focus(); pick(i);
+  });
+  if (!reduce) {
+    video.addEventListener("ended", () => { if (!picked) show((current + 1) % buttons.length, false); });
+    video.addEventListener("timeupdate", () => {
+      if (picked || !video.duration) return;
+      buttons[current].style.setProperty("--run", (video.currentTime / video.duration).toFixed(3));
+    });
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; onScreen(video, visible); }, { threshold: 0.3 }).observe(video);
+  }
 }
 
+// ---- Menu bar: the phone menu and the real MacMin menu ----
+const toggle = $("#navToggle"), links = $("#navLinks"), extra = $("#menuExtra"), drop = $("#menuDrop");
+const setNav = (open) => { links.classList.toggle("open", open); toggle.setAttribute("aria-expanded", String(open)); };
+const setDrop = (open) => { drop.hidden = !open; extra.setAttribute("aria-expanded", String(open)); };
+toggle.addEventListener("click", () => setNav(!links.classList.contains("open")));
+links.addEventListener("click", (e) => { if (e.target.closest("a")) setNav(false); });
+extra.addEventListener("click", () => setDrop(drop.hidden));
+addEventListener("keydown", (e) => { if (e.key === "Escape") { setNav(false); setDrop(false); } });
+addEventListener("pointerdown", (e) => {
+  if (!e.target.closest(".menubar")) { setNav(false); setDrop(false); }
+});
+
+// ---- Phones and tablets: send the page to your Mac ----
+if (matchMedia("(pointer: coarse)").matches) {
+  $$("[data-coarse]").forEach((el) => (el.hidden = false));
+  $$("[data-share]").forEach((btn) => {
+    btn.hidden = false;
+    const label = btn.textContent;
+    btn.addEventListener("click", async () => {
+      const url = "https://macmin.studiographic.ca/";
+      try {
+        if (navigator.share) { await navigator.share({ title: "MacMin", text: "Minimize animations for the Mac", url }); return; }
+        await navigator.clipboard.writeText(url);
+        btn.textContent = "Link copied. Open it on your Mac.";
+        setTimeout(() => (btn.textContent = label), 2500);
+      } catch {}
+    });
+  });
+}
+
+// ---- The closing alert: you can try to keep the Genie ----
+const keep = $("#keepGenie");
+if (keep) {
+  const lines = ["Are you sure?", "Really sure?", "Okay. Genie it is."];
+  let n = 0;
+  keep.addEventListener("click", () => {
+    const alert = keep.closest(".alert");
+    if (!reduce) { alert.classList.remove("shake"); void alert.offsetWidth; alert.classList.add("shake"); }
+    keep.textContent = lines[Math.min(n++, lines.length - 1)];
+  });
+}
+
+// ---- Copy buttons ----
+$$(".copy").forEach((btn) => btn.addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText(document.getElementById(btn.dataset.copy)?.textContent ?? ""); btn.textContent = "Copied"; setTimeout(() => (btn.textContent = "Copy"), 1500); } catch {}
+}));
+
+// ---- version.json: the same file the app checks for updates. The checksum shows once a real one exists. ----
+fetch("version.json", { cache: "no-store" }).then((r) => r.json()).then((v) => {
+  if (v.sha256 && /^[0-9a-f]{64}$/i.test(v.sha256)) { $("#sha").textContent = v.sha256; $("#verify").hidden = false; }
+  if (v.file) $("#hash-cmd").textContent = `shasum -a 256 ~/Downloads/${v.file}`;
+  const os = v.minimumOS ? ` · macOS ${v.minimumOS.replace(/\.0$/, "")} or later` : "";
+  $("#version-line").textContent = `Version ${v.version}${os}`;
+}).catch(() => {});
+
 // ---- Install steps: animate only while on screen; measure the drag distance ----
-const install = document.getElementById("install");
+const install = $("#install");
 if (install) {
   const measure = () => {
-    // Layout offsets, not on-screen boxes, so a resize mid-animation still measures the resting spots.
-    const icon = install.querySelector(".drag-icon"), folder = install.querySelector(".folder");
+    const icon = $(".drag-icon", install), folder = $(".folder", install);
     if (!icon || !folder) return;
     const dx = folder.offsetLeft + (folder.offsetWidth - icon.offsetWidth) / 2 - icon.offsetLeft;
     if (dx > 0) icon.style.setProperty("--dx", `${dx}px`);
   };
   measure();
   addEventListener("resize", measure);
-  new IntersectionObserver(([e]) => install.classList.toggle("play", e.isIntersecting), { threshold: 0.25 }).observe(install);
+  new IntersectionObserver(([e]) => install.classList.toggle("play", e.isIntersecting), { threshold: 0.2 }).observe(install);
 }
 
-// ---- Glass highlight: light follows the pointer across whichever surface it's over ----
-if (!reduce && matchMedia("(hover: hover)").matches) {
-  const glass = ".card, .effect, .step, .ms-card, .perks-buy li, .buy";
-  let raf = 0, last;
-  addEventListener("pointermove", (e) => {
-    last = e;
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      raf = 0;
-      const el = last.target.closest?.(glass);
-      if (!el) return;
-      const r = el.getBoundingClientRect();
-      el.style.setProperty("--mx", `${last.clientX - r.left}px`);
-      el.style.setProperty("--my", `${last.clientY - r.top}px`);
-    });
-  }, { passive: true });
+// ---- Key window: the one most in view keeps its coloured traffic lights ----
+if ("IntersectionObserver" in window) {
+  const wins = $$(".win"), seen = new Map();
+  const pickKey = () => {
+    let best = null, most = 0;
+    seen.forEach((r, w) => { if (r > most) { most = r; best = w; } });
+    wins.forEach((w) => w.classList.toggle("inactive", w !== best));
+  };
+  const kio = new IntersectionObserver((es) => { es.forEach((e) => seen.set(e.target, e.intersectionRect.height)); pickKey(); },
+    { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
+  wins.forEach((w) => kio.observe(w));
 }

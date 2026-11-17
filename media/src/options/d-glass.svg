@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2880 1800" width="2880" height="1800">
+<defs>
+<filter id="b" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="120"/></filter>
+</defs>
+<rect width="2880" height="1800" fill="#eef0f6"/>
+<g filter="url(#b)">
+<circle cx="520" cy="420" r="520" fill="#7cc4ff"/>
+<circle cx="2300" cy="380" r="560" fill="#ffb3d1"/>
+<circle cx="1500" cy="1250" r="620" fill="#ffd36b"/>
+<circle cx="380" cy="1500" r="480" fill="#8ce0c8"/>
+<circle cx="2600" cy="1500" r="460" fill="#b49cff"/>
+</g>
+</svg>

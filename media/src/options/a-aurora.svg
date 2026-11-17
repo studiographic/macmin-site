@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2880 1800" width="2880" height="1800">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b0f2a"/><stop offset="1" stop-color="#05060f"/></linearGradient>
+<filter id="b" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="90"/></filter>
+<filter id="b2" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="40"/></filter>
+</defs>
+<rect width="2880" height="1800" fill="url(#bg)"/>
+<g filter="url(#b)">
+<path d="M-200 1300 C 400 700 800 1500 1400 900 S 2400 300 3100 700 L3100 1050 C 2400 650 1900 1300 1400 1250 S 300 1100 -200 1650Z" fill="#1fb5a8" opacity=".85"/>
+<path d="M-200 900 C 500 500 1100 1100 1600 700 S 2500 200 3100 400 L3100 620 C 2500 420 2000 1000 1500 980 S 400 800 -200 1200Z" fill="#7a4ce0" opacity=".8"/>
+<path d="M200 1650 C 900 1300 1500 1700 2100 1350 S 2800 1200 3100 1300 L3100 1800 L200 1800Z" fill="#f5b82e" opacity=".75"/>
+</g>
+<g filter="url(#b2)" opacity=".7">
+<path d="M-100 1000 C 600 640 1100 1180 1600 800 S 2500 300 3000 480" fill="none" stroke="#b6fff1" stroke-width="18"/>
+</g>
+</svg>

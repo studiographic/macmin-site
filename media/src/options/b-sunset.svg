@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2880 1800" width="2880" height="1800">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1d6b"/><stop offset=".45" stop-color="#c2477e"/><stop offset=".7" stop-color="#ff8a4c"/><stop offset="1" stop-color="#ffc35a"/></linearGradient>
+<linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2b0"/><stop offset="1" stop-color="#f5b82e"/></linearGradient>
+<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a7a"/><stop offset="1" stop-color="#140f33"/></linearGradient>
+<filter id="g"><feGaussianBlur stdDeviation="60"/></filter>
+</defs>
+<rect width="2880" height="1800" fill="url(#sky)"/>
+<circle cx="1440" cy="1150" r="520" fill="#ffd36b" opacity=".45" filter="url(#g)"/>
+<circle cx="1440" cy="1150" r="400" fill="url(#sun)"/>
+<rect y="1150" width="2880" height="650" fill="url(#sea)"/>
+<g fill="#ffd36b" opacity=".55">
+<rect x="1150" y="1200" width="580" height="10" rx="5"/><rect x="1210" y="1250" width="460" height="9" rx="4.5"/><rect x="1270" y="1300" width="340" height="8" rx="4"/><rect x="1330" y="1350" width="220" height="7" rx="3.5"/><rect x="1380" y="1400" width="120" height="6" rx="3"/>
+</g>
+</svg>
