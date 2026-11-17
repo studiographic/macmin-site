@@ -488,28 +488,28 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 @media (prefers-color-scheme: dark) {  }
 
 /* ---------- History: a still rail, read left to right ---------- */
-.hx { margin-top: 36px; }
-.hx-rail { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1.1fr 2.4fr 1fr 1.3fr; position: relative; }
-.hx-rail::before { content: ""; position: absolute; left: 6px; right: 6px; top: 7px; height: 2px; background: linear-gradient(90deg, var(--line) 0 76%, var(--yellow) 76%); border-radius: 2px; }
-.hx-stop { position: relative; padding: 28px 18px 0 0; display: grid; gap: 4px; align-content: start; }
-.hx-stop::before { content: ""; position: absolute; left: 0; top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--win); border: 2px solid var(--muted); }
-.hx-stop.first::before { border-color: var(--yellow); }
-.hx-stop.now::before { width: 14px; height: 14px; top: -1px; background: var(--yellow); border-color: var(--yellow); }
-.hx-stop.gap::before { border-style: dashed; }
+.hx { margin-top: 36px; --gap: 22px; }
+.hx-rail { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto auto 1fr; column-gap: var(--gap); }
+.hx-stop { grid-row: span 3; display: grid; grid-template-rows: subgrid; row-gap: 4px; position: relative; padding-top: 30px; }
+.hx-stop::before { content: ""; position: absolute; top: 7px; left: 14px; right: calc(-1 * var(--gap)); height: 2px; border-radius: 2px; background: var(--line); }
+.hx-stop.gap::before { background: repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 11px); }
+.hx-stop:nth-child(3)::before { background: linear-gradient(90deg, var(--line), var(--yellow)); }
+.hx-stop.now::before { display: none; }
+.hx-stop::after { content: ""; position: absolute; left: 0; top: 1px; width: 10px; height: 10px; border-radius: 50%; background: var(--win); border: 2px solid var(--muted); }
+.hx-stop.plus::after { border-color: var(--yellow); }
+.hx-stop.now::after { width: 14px; height: 14px; top: -1px; left: -2px; background: var(--yellow); border-color: var(--yellow); box-shadow: 0 0 0 5px color-mix(in srgb, var(--yellow) 22%, transparent); }
 .hx-year { font-size: 13px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
 .hx-stop.now .hx-year { color: var(--link); }
 .hx-title { font: 650 18px/1.25 -apple-system, "SF Pro Display", sans-serif; letter-spacing: -0.015em; }
-.hx-note { font-size: 14.5px; color: var(--muted); }
-.hx-tally { justify-self: start; margin-top: 6px; font-size: 12.5px; font-weight: 700; line-height: 1; padding: 5px 8px; border-radius: 6px; color: var(--muted); background: var(--win-2); font-variant-numeric: tabular-nums; }
-.hx-tally.plus { color: var(--yellow-ink); background: var(--yellow); }
-.hx-total { margin-top: 26px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.hx-total b { font: 800 44px/1 -apple-system, "SF Pro Display", sans-serif; letter-spacing: -0.04em; color: #c98a00; font-variant-numeric: tabular-nums; }
-.hx-total span { color: var(--muted); font-size: 15px; }
-@media (prefers-color-scheme: dark) { .hx-total b { color: var(--yellow); } }
+.hx-note { font-size: 14.5px; line-height: 1.45; color: var(--muted); }
+.hx-coda { margin: 34px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font: 650 21px/1.35 -apple-system, "SF Pro Display", sans-serif; letter-spacing: -0.015em; }
+.hx-coda span { color: var(--muted); font-weight: 500; }
 @media (max-width: 760px) {
-  .hx-rail { grid-template-columns: 1fr; gap: 18px; padding-left: 22px; }
-  .hx-rail::before { left: 4px; right: auto; top: 6px; bottom: 6px; width: 2px; height: auto; background: linear-gradient(180deg, var(--line) 0 76%, var(--yellow) 76%); }
-  .hx-stop { padding: 0; }
-  .hx-stop::before { left: -22px; top: 3px; }
-  .hx-stop.now::before { left: -24px; top: 1px; }
+  .hx-rail { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 22px; padding-left: 24px; }
+  .hx-stop { grid-row: auto; grid-template-rows: none; padding-top: 0; }
+  .hx-stop::before { left: -19px; right: auto; top: 16px; bottom: -22px; width: 2px; height: auto; }
+  .hx-stop.gap::before { background: repeating-linear-gradient(180deg, var(--line) 0 6px, transparent 6px 11px); }
+  .hx-stop:nth-child(3)::before { background: linear-gradient(180deg, var(--line), var(--yellow)); }
+  .hx-stop::after { left: -24px; top: 3px; }
+  .hx-stop.now::after { left: -26px; top: 1px; }
 }
