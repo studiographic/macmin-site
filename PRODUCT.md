@@ -27,6 +27,10 @@ MacMin is a macOS menu bar app. It replaces the system minimize animation with G
 - Black Hole
 - Dissolve
 - Television
+- Burn
+- Smoke
+
+Each effect has a setting or two in the menu (for example glass frosting, metal colour, a colour or rainbow for Blobs, Black Hole, Television and Burn, DuoFold's fold side and cracked screen, the amount of smoke).
 
 This site (macmin.studiographic.ca) explains what MacMin does and how it works, in plain language. It also sells the app and is where it's downloaded. Success means visitors pay, install and keep the app on.
 

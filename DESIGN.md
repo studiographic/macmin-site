@@ -159,7 +159,7 @@ components:
 
 **Creative North Star: "The Desktop Itself"**
 
-The page does not describe a Mac; it is one. A single authored wallpaper sits fixed behind everything, a translucent menu bar is the navigation, and every section of content is a real-looking macOS window with traffic lights and a centred title. Windows are titled like the apps they borrow from (a history `.rtf`, Finder, System Settings, About This Mac, an installer, Help) and their internals follow those apps' anatomy: sidebars with vibrancy, grouped settings rows, a QuickTime player bar. The product itself performs inside the windows: the Liquid Glass clip plays in a QuickTime-style window, and the Effects window previews all eight. Traffic lights are decoration; nothing on the page minimizes.
+The page does not describe a Mac; it is one. A single authored wallpaper sits fixed behind everything, a translucent menu bar is the navigation, and every section of content is a real-looking macOS window with traffic lights and a centred title. Windows are titled like the apps they borrow from (a history `.rtf`, Finder, System Settings, About This Mac, an installer, Help) and their internals follow those apps' anatomy: sidebars with vibrancy, grouped settings rows, a QuickTime player bar. The product itself performs inside the windows: the Liquid Glass clip plays in a QuickTime-style window, and the Effects window previews all ten. Traffic lights are decoration; nothing on the page minimizes.
 
 Density is that of a working desktop, not a marketing page. Windows overlap at wide sizes the way someone actually arranges them, and content inside each window is set as native UI: system type, hairline dividers, blue selection, one yellow default button. There are no cards outside window anatomy and no borders beyond the hairlines a Mac draws itself. Light and dark follow the visitor's system setting with no toggle, as real windows do.
 
@@ -275,7 +275,7 @@ Gently rounded Mac geometry: 12px windows, 9px push buttons (11px large), 7px si
 - **Mobile:** menus collapse behind a toggle into a window-styled list; the glyph dropdown hides.
 
 ### History rail
-A still, left-to-right rail: four stops (Cheetah +2, Panther to Sequoia +0, Tahoe +0, MacMin +8) on a 2px line that turns yellow at the MacMin end, with a "10 ways" total below. Vertical on phones. It never reacts to scroll.
+A still, left-to-right rail: four stops (Cheetah +2, Panther to Sequoia +0, Tahoe +0, MacMin +10) on a 2px line that turns yellow at the MacMin end, with a "12 ways" total below. Vertical on phones. It never reacts to scroll.
 
 ### Settings rows and alert
 - **Settings group:** a 12px rounded panel of rows (28px icon, text, switch) divided by hairlines; switches are iOS-style, green when on.
