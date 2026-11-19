@@ -59,7 +59,7 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
   - Don't claim things the app can't guarantee, such as "no recording indicator".
 - **Contact:** macmin@studiographic.ca.
 - **Open:**
-  - the final Buy Me a Coffee URL;
+  - the Buy Me a Coffee minimum price (shop page: https://buymeacoffee.com/studiographic/e/598104);
   - the real DMG checksum, until the first release build;
   - verification of the historical timeline facts.
 
