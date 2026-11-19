@@ -137,7 +137,10 @@ $$(".copy").forEach((btn) => btn.addEventListener("click", async () => {
 // ---- version.json: the same file the app checks for updates. The checksum shows once a real one exists. ----
 fetch("version.json", { cache: "no-store" }).then((r) => r.json()).then((v) => {
   if (v.sha256 && /^[0-9a-f]{64}$/i.test(v.sha256)) { $("#sha").textContent = v.sha256; $("#verify").hidden = false; }
-  if (v.file) $("#hash-cmd").textContent = `shasum -a 256 ~/Downloads/${v.file}`;
+  if (v.file) {
+    $("#hash-cmd").textContent = `shasum -a 256 ~/Downloads/${v.file}`;
+    document.querySelectorAll("[data-dmg]").forEach((el) => (el.textContent = v.file));
+  }
   const os = v.minimumOS ? ` · macOS ${v.minimumOS.replace(/\.0$/, "")} or later` : "";
   $("#version-line").textContent = `Version ${v.version}${os}`;
 }).catch(() => {});
@@ -168,3 +171,8 @@ if ("IntersectionObserver" in window) {
     { threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] });
   wins.forEach((w) => kio.observe(w));
 }
+
+// ---- Opening a link to a Help answer (e.g. #update from the app) opens it ----
+const openTarget = () => { const d = location.hash && document.getElementById(location.hash.slice(1)); if (d && d.tagName === "DETAILS") d.open = true; };
+openTarget();
+addEventListener("hashchange", openTarget);

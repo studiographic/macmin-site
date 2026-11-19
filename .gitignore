@@ -1,1 +1,6 @@
 .DS_Store
+
+# Not served: source art, GIF exports and design-tool state
+media/src/
+media/*.gif
+.impeccable/
