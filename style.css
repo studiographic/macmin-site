@@ -376,6 +376,20 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 @media (min-width: 900px) { .perks-buy li + li { border-top: 0; border-left: 1px solid var(--line); } }
 .perks-buy strong { display: flex; align-items: center; gap: 8px; font-size: 15.5px; }
 .perks-buy span { display: block; color: var(--muted); font-size: 14px; margin-top: 4px; }
+/* Free and Pro, side by side */
+.plans { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.plan { display: flex; flex-direction: column; gap: 8px; padding: 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--win-2); }
+.plan-pro { background: linear-gradient(160deg, rgba(245, 184, 46, 0.16), rgba(245, 184, 46, 0.04) 60%), var(--win-2); border-color: rgba(245, 184, 46, 0.45); }
+.plan img { width: 52px; height: 52px; }
+.plan-name { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: var(--muted); }
+.plan .price { font-size: 48px; }
+.plan .price-note { display: inline; margin: 0 0 0 4px; }
+.plan-lede { color: var(--muted); font-size: 15px; }
+.plan .perks { margin-top: 4px; font-size: 13.5px; }
+.plan .buy-actions { margin-top: auto; padding-top: 10px; }
+.plan .fine { margin-top: 0; }
+.plans + .buy-lede { margin-top: 18px; }
+
 .buy-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 24px; }
 .buy-actions .fine { margin: 0; }
 .phone-note { margin-top: 14px; font-size: 15px; }
@@ -420,8 +434,7 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 @media (max-width: 760px) {
   .installer { grid-template-columns: 1fr; }
   .inst-side { display: none; }
-  .buy { grid-template-columns: 1fr; gap: 12px; }
-  .buy img { width: 64px; height: 64px; }
+  .plans { grid-template-columns: 1fr; }
 }
 
 /* ---------- Help window ---------- */
@@ -478,6 +491,18 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 .tier h4 { margin-top: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
 .tier h4 .badge { font-size: 11.5px; letter-spacing: 0; }
 .perks-inline { margin-top: 18px; }
+
+/* Free / Pro tags on effects */
+.tag { display: inline-block; padding: 1px 7px; border-radius: 999px; font: 700 10.5px/1.5 -apple-system, sans-serif; font-style: normal; letter-spacing: 0.02em; vertical-align: middle; }
+.tag-free { background: rgba(52, 199, 89, 0.18); color: #1a7a33; }
+.tag-pro { background: var(--yellow); color: var(--yellow-ink); }
+@media (prefers-color-scheme: dark) { .tag-free { color: #5fd47d; } }
+.side-key { float: right; font-weight: 400; }
+.picker button[data-pro]::after { content: "Pro"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 1px 6px; border-radius: 999px; font: 700 10px/1.5 -apple-system, sans-serif; background: rgba(245, 184, 46, 0.28); color: var(--link); }
+.picker button[data-pro][aria-pressed="true"]::after { background: rgba(255, 255, 255, 0.25); color: #fff; }
+.stage-head { display: flex; align-items: center; gap: 10px; }
+.stage-head .tag { font-size: 12px; padding: 2px 9px; }
+@media (max-width: 760px) { .side-key { display: none; } .picker button[data-pro] { padding-right: 42px; } }
 /* The window you're looking at is the key window; the rest go grey, like macOS. Hover shows the colours. */
 .win.inactive .lights > * { background: #cfcfd3; }
 @media (prefers-color-scheme: dark) { .win.inactive .lights > * { background: #4a4a4e; } }

@@ -67,6 +67,9 @@ if (stage) {
     video.src = clip(slug, "mp4");
     video.poster = clip(slug, "jpg");
     name.textContent = b.textContent;
+    const pro = b.hasAttribute("data-pro"), tier = $("#stageTier");
+    tier.textContent = pro ? "Pro" : "Free";
+    tier.className = `tag ${pro ? "tag-pro" : "tag-free"}`;
     desc.textContent = b.dataset.desc;
     video.loop = picked;
     if (fromUser) delete video.dataset.userPaused;
@@ -155,6 +158,7 @@ fetch("version.json", { cache: "no-store" }).then((r) => r.json()).then((v) => {
   if (v.file) {
     $("#hash-cmd").textContent = `shasum -a 256 ~/Downloads/${v.file}`;
     document.querySelectorAll("[data-dmg]").forEach((el) => (el.textContent = v.file));
+    $("#download-link").href = `download/${v.file}`;
   }
   const os = v.minimumOS ? ` · macOS ${v.minimumOS.replace(/\.0$/, "")} or later` : "";
   $("#version-line").textContent = `Version ${v.version}${os}`;
