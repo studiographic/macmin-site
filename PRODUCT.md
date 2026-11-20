@@ -13,7 +13,7 @@ Both everyday Mac users and customization enthusiasts, equally.
 - **Everyday Mac users:** people who'd enjoy a fun, cheap visual upgrade. Assume no technical knowledge.
 - **Tinkerers:** people who already run tools like AltTab or DockDoor. They want enough detail to trust and compare.
 
-The job: decide in a minute or two that MacMin is fun, safe and worth a couple of dollars, then install it and grant permissions without fear.
+The job: decide in a minute or two that MacMin is fun and safe, download it free, and later decide Pro is worth $5 and grant permissions without fear.
 
 ## Product Purpose
 
@@ -42,7 +42,8 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
 
 ## Operating Context
 
-- **Payment:** through Buy Me a Coffee, pay what you want with $2 suggested. The site copy currently says "$2 once" and should reflect the suggested/PWYW model.
+- **Model:** free download with Liquid Glass and Liquid Metal. Pro unlocks the other eight effects (and future ones) for $5 once (CAD, or USD for US buyers). Pro checkout is a Stripe Payment Link (test mode for now); licensing is not set up yet.
+- **Download:** the free DMG is linked at `download/<file>` from `version.json`.
 - **Download:** a notarized, Developer ID–signed DMG, with a published SHA-256 checksum.
 - **Updates:** the app checks `version.json` on this site once a day, and the user can turn that off.
 - **Permissions:** install requires granting Accessibility and Screen Recording. Since Sequoia, macOS periodically re-prompts for Screen Recording.
@@ -54,7 +55,7 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
 
 ## Capabilities and Constraints
 
-- **Pricing promises:** pay once, every Mac you own, lifetime updates, no subscription.
+- **Pricing promises:** free tier forever with no nagging; Pro is $5 once, every Mac you own, lifetime updates, no subscription.
 - **Effect names are fixed:** Blobs (not Goo), Dissolve (not Sand) and Television (not TV Off).
 - **Privacy claims must stay accurate:**
   - Nothing is saved or sent.
@@ -86,7 +87,7 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
 
 1. **Show, don't claim.** The real effects, especially Liquid Glass, do the selling.
 2. **Trust in plain words.** Explain the permissions and privacy honestly enough for a non-technical person to say yes.
-3. **Cheap and fair, said often.** Make clear it's pay what you want, works on every Mac you own and has no subscription.
+3. **Free first, fair Pro.** Make clear the download is free, Pro is $5 once, covers every Mac you own and has no subscription.
 4. **Fun first, depth on demand.** Lead with the joke and the visuals, and keep the specs and compatibility one click away for tinkerers.
 5. **Never overstate.** Don't make untested performance claims or invent social proof.
 
