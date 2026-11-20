@@ -50,7 +50,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 body {
   margin: 0;
   color: var(--text);
-  background: #e9a23a;
+  background: var(--wall-fallback);
   font: 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -58,9 +58,12 @@ body {
 /* The wallpaper: fixed behind everything, like a real desktop */
 body::before {
   content: ""; position: fixed; inset: 0; z-index: -1;
-  background: linear-gradient(var(--wall-dim), var(--wall-dim)), url("media/wallpaper.jpg") center / cover no-repeat;
+  background: linear-gradient(var(--wall-dim), var(--wall-dim)), var(--wall) center / cover no-repeat;
 }
-@media (max-width: 760px) { body::before { background-image: linear-gradient(var(--wall-dim), var(--wall-dim)), url("media/wallpaper-sm.jpg"); } }
+/* One wallpaper in both themes (Zulfikar Laode, Unsplash); the clips and little scenes use a second
+   photo (Waro Photos, Unsplash). Credited in the footer. */
+:root { --wall: url("media/wallpaper.jpg"); --wall-sm: url("media/wallpaper-sm.jpg"); --scene: url("media/scene.jpg"); --wall-fallback: #f2a93b; }
+@media (max-width: 760px) { body::before { background-image: linear-gradient(var(--wall-dim), var(--wall-dim)), var(--wall-sm); } }
 
 ::selection { background: color-mix(in srgb, var(--sel) 30%, transparent); }
 img, video { display: block; max-width: 100%; }
@@ -383,7 +386,7 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 .step p { margin-top: 4px; color: var(--muted); font-size: 14.5px; }
 .step b { color: var(--text); }
 .step-n { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; font-size: 12.5px; font-weight: 700; color: var(--yellow-ink); background: var(--yellow); flex: none; }
-.scene { height: 132px; border-radius: 10px; overflow: hidden; position: relative; display: grid; place-items: center; background: url("media/wallpaper-sm.jpg") center / cover; }
+.scene { height: 132px; border-radius: 10px; overflow: hidden; position: relative; display: grid; place-items: center; background: var(--scene) center / cover; }
 .dl { display: flex; align-items: center; gap: 10px; padding: 9px 12px 9px 9px; border-radius: 12px; background: var(--win); box-shadow: var(--win-shadow); }
 .dmg { width: 40px; height: 40px; border-radius: 9px; background: linear-gradient(180deg, #f4f4f6, #d9d9de); display: grid; place-items: center; }
 .dmg img { width: 28px; height: 28px; }
@@ -482,10 +485,10 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 .win.inactive .titlebar:hover .lights .l-min { background: #febc2e; }
 .win.inactive .titlebar:hover .lights .l-zoom { background: #28c840; }
 
-/* Amber wallpaper: dark ink reads on it in both themes */
+/* Footer ink: dark on the warm wallpaper, in both themes */
 .footer { color: #170e01; text-shadow: none; }
 .footer a { color: #170e01; }
-@media (prefers-color-scheme: dark) {  }
+.footer .credit { font-size: 12px; opacity: 0.8; }
 
 /* ---------- History: a still rail, read left to right ---------- */
 .hx { margin-top: 36px; --gap: 22px; }

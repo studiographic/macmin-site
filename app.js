@@ -3,6 +3,21 @@ document.documentElement.classList.add("js");
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
+// ---- Clips match the wallpaper: Sunlit clips in light mode, Graphite clips (media/dark/) in dark ----
+const darkScheme = matchMedia("(prefers-color-scheme: dark)");
+// ?v bumps when the clips are re-rendered, so browsers don't keep old ones.
+const clip = (slug, ext) => `media/${darkScheme.matches ? "dark/" : ""}${slug}.${ext}?v=2`;
+const matchTheme = () => $$("video").forEach((v) => {
+  const slug = (v.getAttribute("src") || "").match(/(\w+)\.mp4/)?.[1];
+  if (!slug || v.getAttribute("src") === clip(slug, "mp4")) return;
+  const t = v.currentTime, playing = !v.paused;
+  v.poster = clip(slug, "jpg");
+  v.src = clip(slug, "mp4");
+  if (t) v.addEventListener("loadedmetadata", () => { v.currentTime = t; if (playing) v.play().catch(() => {}); }, { once: true });
+});
+matchTheme();
+darkScheme.addEventListener("change", matchTheme);
+
 // ---- Clips play only while on screen; a clip someone paused stays paused ----
 const onScreen = (v, play) => (play && !v.dataset.userPaused ? v.play().catch(() => {}) : v.pause());
 if (reduce) {
@@ -49,8 +64,8 @@ if (stage) {
     current = i;
     const b = buttons[i], slug = b.dataset.effect;
     buttons.forEach((x, j) => { x.setAttribute("aria-pressed", String(j === i)); x.style.removeProperty("--run"); });
-    video.src = `media/${slug}.mp4`;
-    video.poster = `media/${slug}.jpg`;
+    video.src = clip(slug, "mp4");
+    video.poster = clip(slug, "jpg");
     name.textContent = b.textContent;
     desc.textContent = b.dataset.desc;
     video.loop = picked;
@@ -61,7 +76,7 @@ if (stage) {
       picker.scrollTo({ left: b.parentElement.offsetLeft - picker.clientWidth / 2 + b.offsetWidth / 2, behavior: reduce ? "auto" : "smooth" });
     }
     const next = buttons[(i + 1) % buttons.length].dataset.effect;
-    if (!$(`link[data-next="${next}"]`)) document.head.insertAdjacentHTML("beforeend", `<link rel="prefetch" href="media/${next}.mp4" data-next="${next}">`);
+    if (!$(`link[data-next="${next}"]`)) document.head.insertAdjacentHTML("beforeend", `<link rel="prefetch" href="${clip(next, "mp4")}" data-next="${next}">`);
   };
   const pick = (i) => {
     if (!picked) { picked = true; desc.setAttribute("aria-live", "polite"); tour.hidden = reduce; }
