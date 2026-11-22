@@ -188,6 +188,8 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .perks { list-style: none; padding: 0; margin: 22px 0 0; display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 14px; font-weight: 600; }
 .perks li { display: inline-flex; align-items: center; gap: 6px; }
+.welcome .perks { display: grid; grid-template-columns: repeat(2, max-content); gap: 8px 28px; }
+@media (max-width: 520px) { .welcome .perks { grid-template-columns: 1fr; } }
 .perks li::before, .perks-buy strong::before, .promises li::before {
   content: ""; flex: none; width: 16px; height: 16px; border-radius: 50%;
   background: var(--yellow) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.3l2.6 2.6L13 6.5' fill='none' stroke='%233a2a05' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat;
@@ -229,7 +231,6 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 .qt-play:focus-visible { border-radius: 50%; }
 .qt-track { flex: 1; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, 0.18); overflow: hidden; }
 .qt-track i { display: block; height: 100%; width: 100%; background: var(--yellow); transform-origin: left; transform: scaleX(var(--t, 0)); }
-.qt-name { flex: none; font-weight: 600; }
 .qt-play.floating { position: absolute; right: 12px; bottom: 12px; background: rgba(20, 20, 24, 0.5); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 
 /* ---------- Document window (history) ---------- */
@@ -497,12 +498,14 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 .tag-free { background: rgba(52, 199, 89, 0.18); color: #1a7a33; }
 .tag-pro { background: var(--yellow); color: var(--yellow-ink); }
 @media (prefers-color-scheme: dark) { .tag-free { color: #5fd47d; } }
-.side-key { float: right; font-weight: 400; }
 .picker button[data-pro]::after { content: "Pro"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 1px 6px; border-radius: 999px; font: 700 10px/1.5 -apple-system, sans-serif; background: rgba(245, 184, 46, 0.28); color: var(--link); }
 .picker button[data-pro][aria-pressed="true"]::after { background: rgba(255, 255, 255, 0.25); color: #fff; }
+.picker button[data-free]::after { content: "Free"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%); padding: 1px 6px; border-radius: 999px; font: 700 10px/1.5 -apple-system, sans-serif; background: rgba(52, 199, 89, 0.18); color: #1a7a33; }
+.picker button[data-free][aria-pressed="true"]::after { background: rgba(255, 255, 255, 0.25); color: #fff; }
+@media (prefers-color-scheme: dark) { .picker button[data-free]:not([aria-pressed="true"])::after { color: #5fd47d; } }
 .stage-head { display: flex; align-items: center; gap: 10px; }
 .stage-head .tag { font-size: 12px; padding: 2px 9px; }
-@media (max-width: 760px) { .side-key { display: none; } .picker button[data-pro] { padding-right: 42px; } }
+@media (max-width: 760px) { .picker button[data-pro], .picker button[data-free] { padding-right: 42px; } }
 /* The window you're looking at is the key window; the rest go grey, like macOS. Hover shows the colours. */
 .win.inactive .lights > * { background: #cfcfd3; }
 @media (prefers-color-scheme: dark) { .win.inactive .lights > * { background: #4a4a4e; } }
@@ -530,8 +533,8 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
 .hx-stop.now .hx-year { color: var(--link); }
 .hx-title { font: 650 18px/1.25 -apple-system, "SF Pro Display", sans-serif; letter-spacing: -0.015em; }
 .hx-note { font-size: 14.5px; line-height: 1.45; color: var(--muted); }
-.hx-coda { margin: 34px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font: 650 21px/1.35 -apple-system, "SF Pro Display", sans-serif; letter-spacing: -0.015em; }
-.hx-coda span { color: var(--muted); font-weight: 500; }
+.hx-coda { margin: 34px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font: 650 21px/1.35 -apple-system, "SF Pro Display", sans-serif; letter-spacing: -0.015em; text-align: center; }
+.hx-coda span { color: var(--muted); font-weight: 500; display: block; margin-top: 4px; }
 @media (max-width: 760px) {
   .hx-rail { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 22px; padding-left: 24px; }
   .hx-stop { grid-row: auto; grid-template-rows: none; padding-top: 0; }
