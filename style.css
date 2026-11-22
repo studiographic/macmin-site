@@ -475,9 +475,8 @@ code, pre { font: 13px/1.5 ui-monospace, "SF Mono", Menlo, monospace; }
   .preview-screen video { max-height: calc(100svh - 300px); min-height: 280px; }
 }
 
-/* Phones: the effect first, then the pitch */
+/* Phones: the pitch first, then the effect */
 @media (max-width: 760px) {
-  .win-player { order: -1; }
   .welcome .perks { display: none; }
 }
 

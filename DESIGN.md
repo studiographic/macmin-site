@@ -229,7 +229,7 @@ The page is a desktop of stacked, sometimes overlapping, windows on a 12-column 
 
 - **1100px and up:** two-column overlap in the first viewport. Welcome spans columns 1–7; the player window spans 7–12, drops 150px and sits above it in z-order. Welcome content caps at 520px so it stays clear of the overlapping player. Later windows alternate offsets (2/10, 1/11, 3/10, 1/10, 4/9, 1/12).
 - **Below 1100px:** a single column, 40px row gap, 16px gutter. The player still tucks up 24px under the welcome window and indents 12% to keep the overlap.
-- **760px and below (phone):** 10px gutter, 22px row gap, no overlap. The clip window comes first, then the welcome window; the welcome perks hide. Window sidebars either hide (Settings, Installer) or become a horizontal pill scroller under the preview (Finder). The menu bar collapses to a single menu toggle.
+- **760px and below (phone):** 10px gutter, 22px row gap, no overlap. The welcome window stays first, with the clip window below it; the welcome perks hide. Window sidebars either hide (Settings, Installer) or become a horizontal pill scroller under the preview (Finder). The menu bar collapses to a single menu toggle.
 
 Inside windows, body padding scales with clamp(22px, 3.4vw, 44px); sidebar windows use a fixed 200–220px sidebar beside a fluid pane.
 
@@ -290,7 +290,7 @@ A still, left-to-right rail: four stops (Cheetah +2, Panther to Sequoia +0, Taho
 - **Do** pair every vibrancy fill with its backdrop blur.
 - **Do** follow `prefers-color-scheme` for light and dark, and define new colours in both themes.
 - **Do** keep the page still: let the effect clips carry the motion, never tie animation to scroll, and make every animation stop under Reduce Motion.
-- **Do** put the clip window first on phones.
+- **Do** keep the welcome window first on phones, with the clip window below it.
 
 ### Don't:
 - **Don't** use cards, borders or panels outside real window anatomy; hairlines and settings groups are the only internal structure.
