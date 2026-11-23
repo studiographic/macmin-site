@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MacMin · Minimize animations for macOS</title>
-  <meta name="description" content="Genie and Scale have been the only minimize animations on the Mac since 2001. MacMin adds eleven new ones. Liquid Glass, Liquid Metal and Snow are free, and Pro unlocks the rest for $5, once. A tiny menu bar app for macOS 14 and later.">
+  <meta name="description" content="Genie and Scale have been the only minimize animations on the Mac since 2001. MacMin adds eleven new ones. Liquid Glass and Liquid Metal are free, and Pro unlocks the rest for $5, once. A tiny menu bar app for macOS 14 and later.">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f0a83a">
   <link rel="icon" type="image/png" href="media/favicon.png">
   <link rel="apple-touch-icon" href="media/apple-touch-icon.png">
   <meta property="og:title" content="MacMin · Minimizing should be cool">
-  <meta property="og:description" content="Genie and Scale, since 2001. That’s it. That’s the list. MacMin adds eleven new minimize animations to your Mac. Three are free.">
+  <meta property="og:description" content="Genie and Scale, since 2001. That’s it. That’s the list. MacMin adds eleven new minimize animations to your Mac. Two are free.">
   <meta property="og:image" content="https://macmin.studiographic.ca/media/og.jpg">
   <meta property="og:url" content="https://macmin.studiographic.ca/">
   <meta name="twitter:card" content="summary_large_image">
@@ -72,7 +72,7 @@
         <a class="btn btn-quiet" href="#effects">See all eleven</a>
       </div>
       <ul class="perks" aria-label="What you get">
-        <li>Free download</li><li>Liquid Glass, Liquid Metal and Snow, free forever</li><li>All eleven for $5, once</li><li>No subscription</li>
+        <li>Free download</li><li>Liquid Glass and Liquid Metal, free forever</li><li>All eleven for $5, once</li><li>No subscription</li>
       </ul>
       <p class="fine">For macOS 14 Sonoma or later · Apple silicon and Intel (<a href="#compat">will it run on mine?</a>)</p>
       <button class="send-link" type="button" data-share hidden>On your phone? Send this page to your Mac</button>
@@ -131,7 +131,6 @@
         <ul class="picker" aria-label="Pick an effect">
           <li><button type="button" aria-pressed="true" data-effect="liquidGlass" data-free data-desc="Turns to glass and pours itself into the Dock. Fancy. Frost it up, or bend the light more.">Liquid Glass</button></li>
           <li><button type="button" aria-pressed="false" data-effect="liquidMetal" data-free data-desc="Molten chrome. Very sci-fi villain. Or gold, copper, titanium and friends, polished or brushed.">Liquid Metal</button></li>
-          <li><button type="button" aria-pressed="false" data-effect="snow" data-free data-desc="A gust of wind blows it away in a flurry of snow, real snowflakes and all, with a few stragglers hurrying to catch up. Pick which way the wind blows and how many flakes.">Snow</button></li>
           <li><button type="button" aria-pressed="false" data-effect="blobs" data-pro data-desc="Melts into blobs that wobble off one by one. In the window’s own colours, one of yours, or a rainbow.">Blobs</button></li>
           <li><button type="button" aria-pressed="false" data-effect="shatter" data-pro data-desc="Smashes into shards. Deeply satisfying on a Monday. Big chunks or tiny bits.">Shatter</button></li>
           <li><button type="button" aria-pressed="false" data-effect="duoFold" data-pro data-desc="Folds shut like a card and tucks itself away. From either side, with an optional cracked crease for realism.">DuoFold</button></li>
@@ -140,6 +139,7 @@
           <li><button type="button" aria-pressed="false" data-effect="television" data-pro data-desc="Click. Like switching off a TV from 1987. Or green, or amber, if your TV was even older.">Television</button></li>
           <li><button type="button" aria-pressed="false" data-effect="burn" data-pro data-desc="Catches fire in the middle and burns away to nothing. Pick your flame colour, rainbow included.">Burn</button></li>
           <li><button type="button" aria-pressed="false" data-effect="smoke" data-pro data-desc="Goes up in smoke and drifts into the Dock. A little wisp or a big billowing cloud.">Smoke</button></li>
+          <li><button type="button" aria-pressed="false" data-effect="snow" data-pro data-desc="A gust of wind blows it away in a flurry of snow, every piece a little snowflake, with a few stragglers hurrying to catch up. Pick which way the wind blows and how many flakes.">Snow</button></li>
         </ul>
       </div>
       <div class="preview" id="stage">
@@ -153,7 +153,7 @@
         <div class="preview-info">
           <h3 class="stage-head"><span id="stageName">Liquid Glass</span> <i class="tag tag-free" id="stageTier">Free</i></h3>
           <p id="stageDesc">Turns to glass and pours itself into the Dock. Fancy. Frost it up, or bend the light more.</p>
-          <p class="preview-note">Each one plays when a window heads to the Dock, and backwards when it comes home. Swap any time from the menu bar. Commitment is not required. Liquid Glass, Liquid Metal and Snow come free; Pro unlocks the other eight for $5, once.</p>
+          <p class="preview-note">Each one plays when a window heads to the Dock, and backwards when it comes home. Swap any time from the menu bar. Commitment is not required. Liquid Glass and Liquid Metal come free; Pro unlocks the other nine for $5, once.</p>
           <button class="tour" id="tour" type="button" hidden>Play them all in a row</button>
         </div>
       </div>
@@ -299,7 +299,7 @@
             <img src="media/icon-176.png" alt="" width="64" height="64">
             <h3 class="plan-name">MacMin</h3>
             <p class="price">Free</p>
-            <p class="plan-lede">Liquid Glass, Liquid Metal and Snow, with every setting. No trial, no timer, no nagging. Yours to keep.</p>
+            <p class="plan-lede">Liquid Glass and Liquid Metal, with every setting. No trial, no timer, no nagging. Yours to keep.</p>
             <div class="buy-actions">
               <a class="btn btn-big" id="download-link" href="download/MacMin-1.0.dmg" download>Download free</a>
             </div>
@@ -318,7 +318,7 @@
             </div>
           </div>
         </div>
-        <p class="buy-lede">Start free. If the glass makes you smile and you want fire, smoke and black holes too, Pro is less than a coffee and cheaper than 25 more years of Genie.</p>
+        <p class="buy-lede">Start free. If the glass makes you smile and you want fire, snow and black holes too, Pro is less than a coffee and cheaper than 25 more years of Genie.</p>
         <p class="phone-note" data-coarse hidden>On your phone? MacMin installs on a Mac, so open this page there to download. You can buy Pro from anywhere.</p>
         <p class="fine">Questions about Pro? Email <a href="mailto:macmin@studiographic.ca">macmin@studiographic.ca</a>.</p>
 
@@ -379,8 +379,8 @@
       <div class="faq-groups">
         <div class="faq-group">
           <h4>Free and Pro</h4>
-          <details><summary>What’s free?</summary><p>MacMin itself, Liquid Glass, Liquid Metal and Snow, and every setting they have. Forever. No trial, no ads, no “upgrade now” pop-ups every time you minimize.</p></details>
-          <details><summary>What does Pro get me?</summary><p>The other eight effects: Blobs, Shatter, DuoFold, Black Hole, Dissolve, Television, Burn and Smoke, plus any new ones I add later. $5, once.</p></details>
+          <details><summary>What’s free?</summary><p>MacMin itself, Liquid Glass and Liquid Metal, and every setting they have. Forever. No trial, no ads, no “upgrade now” pop-ups every time you minimize.</p></details>
+          <details><summary>What does Pro get me?</summary><p>The other nine effects: Blobs, Shatter, DuoFold, Black Hole, Dissolve, Television, Burn, Smoke and Snow, plus any new ones I add later. $5, once.</p></details>
           <details><summary>Is Pro a subscription?</summary><p>Nope, never. You pay $5 once and it’s yours, including every update that ever comes out. No renewals, no “your trial has ended.”</p></details>
           <details><summary>Can I put it on my other Macs?</summary><p>Yes! The free version goes on as many Macs as you like, and one Pro purchase covers every Mac you own.</p></details>
           <details><summary>Why isn’t it on the Mac App Store?</summary><p>App Store apps aren’t allowed to notice when you press minimize in other apps, which is kind of the whole point of MacMin. So it lives here instead, signed and notarized with Apple the same way.</p></details>

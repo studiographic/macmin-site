@@ -42,7 +42,7 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
 
 ## Operating Context
 
-- **Model:** free download with Liquid Glass, Liquid Metal and Snow. Pro unlocks the other eight effects (and future ones) for $5 once (CAD, or USD for US buyers). Pro checkout is a Stripe Payment Link (test mode for now); licensing is not set up yet.
+- **Model:** free download with Liquid Glass and Liquid Metal. Pro unlocks the other nine effects (and future ones) for $5 once (CAD, or USD for US buyers). Pro checkout is a Stripe Payment Link (test mode for now); licensing is not set up yet.
 - **Download:** the free DMG is linked at `download/<file>` from `version.json`.
 - **Download:** a notarized, Developer ID–signed DMG, with a published SHA-256 checksum.
 - **Updates:** the app checks `version.json` on this site once a day, and the user can turn that off.
