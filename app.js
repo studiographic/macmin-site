@@ -6,7 +6,7 @@ const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 // ---- Clips match the wallpaper: Sunlit clips in light mode, Graphite clips (media/dark/) in dark ----
 const darkScheme = matchMedia("(prefers-color-scheme: dark)");
 // ?v bumps when the clips are re-rendered, so browsers don't keep old ones.
-const clip = (slug, ext) => `media/${darkScheme.matches ? "dark/" : ""}${slug}.${ext}?v=2`;
+const clip = (slug, ext) => `media/${darkScheme.matches ? "dark/" : ""}${slug}.${ext}?v=3`;
 const matchTheme = () => $$("video").forEach((v) => {
   const slug = (v.getAttribute("src") || "").match(/(\w+)\.mp4/)?.[1];
   if (!slug || v.getAttribute("src") === clip(slug, "mp4")) return;
@@ -50,7 +50,7 @@ $$("[data-progress]").forEach((bar) => {
   v.addEventListener("timeupdate", () => { if (v.duration) bar.style.setProperty("--t", (v.currentTime / v.duration).toFixed(3)); });
 });
 
-// ---- Effects window: one preview, eight to pick from; runs through them until you pick one ----
+// ---- Effects window: one preview, eleven to pick from; runs through them until you pick one ----
 const stage = $("#stage");
 const buttons = $$(".picker button");
 let showEffect = () => {};

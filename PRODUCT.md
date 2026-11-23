@@ -30,7 +30,7 @@ MacMin is a macOS menu bar app. It replaces the system minimize animation with G
 - Burn
 - Smoke
 
-Each effect has a setting or two in the menu (for example glass frosting, metal colour, a colour or rainbow for Blobs, Black Hole, Television and Burn, DuoFold's fold side and cracked screen, the amount of smoke).
+Each effect has a setting or two in the menu (for example glass frosting, metal colour, a colour or rainbow for Blobs, Black Hole, Television and Burn, DuoFold's fold side and cracked screen, the amount of smoke, which way Snow's wind blows and how many snowflakes).
 
 This site (macmin.studiographic.ca) explains what MacMin does and how it works, in plain language. It also sells the app and is where it's downloaded. Success means visitors pay, install and keep the app on.
 
@@ -42,7 +42,7 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
 
 ## Operating Context
 
-- **Model:** free download with Liquid Glass and Liquid Metal. Pro unlocks the other eight effects (and future ones) for $5 once (CAD, or USD for US buyers). Pro checkout is a Stripe Payment Link (test mode for now); licensing is not set up yet.
+- **Model:** free download with Liquid Glass, Liquid Metal and Snow. Pro unlocks the other eight effects (and future ones) for $5 once (CAD, or USD for US buyers). Pro checkout is a Stripe Payment Link (test mode for now); licensing is not set up yet.
 - **Download:** the free DMG is linked at `download/<file>` from `version.json`.
 - **Download:** a notarized, Developer ID–signed DMG, with a published SHA-256 checksum.
 - **Updates:** the app checks `version.json` on this site once a day, and the user can turn that off.
