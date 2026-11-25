@@ -42,7 +42,8 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
 
 ## Operating Context
 
-- **Model:** free download with Liquid Glass and Liquid Metal. Pro unlocks the other nine effects (and future ones) for $5 once (CAD, or USD for US buyers). Pro checkout is a Stripe Payment Link (test mode for now); licensing is not set up yet.
+- **Model:** free download with Liquid Glass and Liquid Metal. Every effect is unlocked for 7 days from first launch (a local free week; no account, no server), then the app goes back to the free ones unless Pro is bought. Pro unlocks every other effect (and future ones) for $5 once (CAD, or USD for US buyers). Pro checkout is a Stripe Payment Link (test mode for now).
+- **Pro key:** a signed key (starts `MACMIN-PRO`), given on the thank-you page and in the receipt email, with a `macmin://unlock` link. It's pasted in Settings › Enter Key; the same key works on every Mac. The app side is built; the thank-you page and receipt still need to deliver the key.
 - **Download:** the free DMG is linked at `download/<file>` from `version.json`.
 - **Download:** a notarized, Developer ID–signed DMG, with a published SHA-256 checksum.
 - **Updates:** the app checks `version.json` on this site once a day, and the user can turn that off.
@@ -56,10 +57,14 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
 ## Capabilities and Constraints
 
 - **Pricing promises:** free tier forever with no nagging; Pro is $5 once, every Mac you own, lifetime updates, no subscription.
+- **Free week:** every effect for 7 days from first launch, then back to Liquid Glass and Liquid Metal. It's tracked on the Mac only and made hard to reset, not impossible, so never claim it can't be reset or say how. Don't call the free tier "no trial" any more.
+- **No effect counts:** never say how many effects there are (or how many Pro adds). More are coming, so name examples or say "every effect" instead.
 - **Effect names are fixed:** Blobs (not Goo), Dissolve (not Sand) and Television (not TV Off).
 - **Privacy claims must stay accurate:**
   - Nothing is saved or sent.
   - The only network call is the update check.
+  - Stored locally: settings, a bug log (no window titles or typing), the Pro key, and the free-week record (Keychain, preferences, a file). None of it leaves the Mac.
+  - Update checks and Check Now live in the Settings window, not the menu.
   - Typed input is never kept or recorded.
   - Don't claim things the app can't guarantee, such as "no recording indicator".
 - **Contact:** macmin@studiographic.ca.

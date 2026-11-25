@@ -50,7 +50,7 @@ $$("[data-progress]").forEach((bar) => {
   v.addEventListener("timeupdate", () => { if (v.duration) bar.style.setProperty("--t", (v.currentTime / v.duration).toFixed(3)); });
 });
 
-// ---- Effects window: one preview, eleven to pick from; runs through them until you pick one ----
+// ---- Effects window: one preview, every effect to pick from; runs through them until you pick one ----
 const stage = $("#stage");
 const buttons = $$(".picker button");
 let showEffect = () => {};
