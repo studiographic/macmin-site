@@ -27,7 +27,7 @@ CNAME          the custom domain
 ## Each release
 
 1. In `macmin`: bump `CFBundleShortVersionString` in `Resources/Info.plist`, then `./build.sh release`.
-2. Upload `build/MacMin-<version>.dmg` to the Buy Me a Coffee item (replacing the old file).
+2. Put `build/MacMin-<version>.dmg` where the Download button points: `download/MacMin-<version>.dmg` (`app.js` builds that link from `file` in `version.json`).
 3. Here, update `version.json`: `version`, `notes`, `date`, `file`, and `sha256` from `build/MacMin-<version>.dmg.sha256`. Push.
    Everyone with automatic checks on hears about it within a day.
 
