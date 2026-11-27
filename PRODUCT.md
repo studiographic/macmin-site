@@ -63,7 +63,7 @@ This site (macmin.studiographic.ca) explains what MacMin does and how it works, 
 - **Privacy claims must stay accurate:**
   - Nothing is saved or sent.
   - The only network call is the update check.
-  - Stored locally: settings, a bug log (no window titles or typing), the Pro key, and the free-week record (Keychain, preferences, a file). None of it leaves the Mac.
+  - Stored locally: settings, a bug log (no window titles or typing), the Pro key, and the free-week record (preferences and a file; never the Keychain). None of it leaves the Mac.
   - Update checks and Check Now live in the Settings window, not the menu.
   - Typed input is never kept or recorded.
   - Don't claim things the app can't guarantee, such as "no recording indicator".
