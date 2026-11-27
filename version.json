@@ -2,8 +2,8 @@
   "version": "1.0",
   "url": "https://macmin.studiographic.ca/#update",
   "notes": "The first release.",
-  "date": "2026-11-14",
+  "date": "2026-11-26",
   "minimumOS": "14.0",
   "file": "MacMin-1.0.dmg",
-  "sha256": "PASTE-FROM-build/MacMin-1.0.dmg.sha256"
+  "sha256": "d0f1285717f8b2e1c602fb72b137a745abac1b5b92f2f6a488316a0a71087086"
 }
